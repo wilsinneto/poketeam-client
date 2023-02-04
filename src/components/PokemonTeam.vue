@@ -1,36 +1,25 @@
 <template>
   <main id="main">
-    <h1>Olá, Seja bem vindo ao seu sistema de Pokéteam!</h1>
-    <section class="section">
-      <a class="link" rel="pokemons" @click="toPokemons()">
-        <div class="item">
-          Pokémons
-        </div>
-      </a>
-      <a class="link" rel="pokemon-team" @click="toPokemonTeam()">
-        <div class="item">
-          Pokémon Team
-        </div>
-      </a>
-    </section>
+    <h1>Pokemon Team!</h1>
+    <a @click="goBack">Voltar</a>
   </main>
 </template>
 
 <script>
 export default {
-  app: "Home",
+  app: "Pokemon Team",
   methods: {
-    toPokemons() {
-      this.$router.push("/pokemons");
-    },
-    toPokemonTeam() {
-      this.$router.push("/pokemon-team")
+    goBack() {
+      this.$router.go(-1);
     }
   }
 }
 </script>
 
 <style>
+a {
+  cursor: pointer;
+}
 #main {
   text-align: center;
   margin-top: 60px;

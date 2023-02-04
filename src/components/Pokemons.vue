@@ -1,15 +1,37 @@
 <template>
   <main id="main">
     <h1>Pokemons!</h1>
-    <router-link to="/">Home</router-link>
-    
+    <router-link to="/">Voltar</router-link>
   </main>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   app: "Home",
-  methods: {}
+  data() {
+    return {
+      api: {}
+    }
+  },
+  async created() {
+    this.api = axios.create({
+      baseURL: `${process.env.VUE_APP_API_URL}` + '/api',
+      headers: {
+        'Access-Control-Allow-Origin': '*',
+        'access-control-allow-headers': '*',
+        'access-control-allow-Methods': '*',
+      },
+    })
+
+    // await this.api.request({
+    //   method
+    // })
+  },
+  methods: {
+    
+  }
 }
 </script>
 
