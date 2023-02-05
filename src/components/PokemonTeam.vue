@@ -68,7 +68,7 @@ export default {
         pokemons: []
       },
       pokemonsList: [],
-      pokemonListSelected: null,
+      pokemonListSelected: [],
       pokemonsTeam: []
     }
   },
@@ -103,7 +103,7 @@ export default {
     }
 
     const response = await this.api.request({
-      method: 'POST',
+      method: 'GET',
       url: '/find-all-pokemon-team'
     })
     .catch(function (error) {
@@ -189,11 +189,15 @@ export default {
         alert('Quantidade de pokémons por time não pode ser maior do que 6.')
       }
 
+      if (status === 400 && data.name === 'InvalidNameError') {
+        alert('Campo nome deve ter ao menos 3 caracteres.')
+      }
+
       if (status === 201) {
         if (!this.pokemonsTeam.find(pokemonTeam => pokemonTeam.id === data.id)) {
           this.pokemonsTeam.push(data)
           this.pokemonTeam = {}
-          this.pokemonListSelected = null
+          this.pokemonListSelected = []
         }
       }
     }
