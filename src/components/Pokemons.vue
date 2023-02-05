@@ -62,7 +62,7 @@ export default {
     })
 
     const { data, status } = await this.api.request({
-      method: 'POST',
+      method: 'GET',
       url: '/find-all-pokemons'
     })
     .catch(function (error) {
