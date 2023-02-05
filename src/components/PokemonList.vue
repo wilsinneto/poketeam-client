@@ -1,22 +1,14 @@
 <template>
-  <div class="card">
-    <div class="card-body">
-      <ul class="list-group">
-        <div class="card-group">
-          <div class="card d-flex flex-row">
-            <li class="list-group-item" v-for="pokemon in pokemons" :key="pokemon.id">
-              <div style="cursor: pointer;" @click="openPokemonViewDetail(pokemon)">
-                <img :src="pokemon.imageUrl" class="card-img-top" :alt="pokemon.name">
-                <div class="card-body">
-                    <h5 class="card-title">{{ pokemon.name }}</h5>
-                    <span class="text-primary">{{ pokemon.specie }}</span>
-                </div>
-              </div>
-            </li>
-          </div>
+  <div class="pokemon-grid" style="">
+    <li class="list-group-item" v-for="pokemon in pokemons" :key="pokemon.id">
+      <div style="cursor: pointer;" @click="openPokemonViewDetail(pokemon)">
+        <img style="max-width: 167px; max-height: 247px;" :src="pokemon.imageUrl" :alt="pokemon.name">
+        <div>
+          <h5 class="card-title">{{ pokemon.name }}</h5>
+          <span class="text-primary">{{ pokemon.specie }}</span>
         </div>
-      </ul>
-    </div>
+      </div>
+    </li>
   </div>
 </template>
 
@@ -33,5 +25,12 @@ export default {
 </script>
 
 <style>
-
+.pokemon-grid {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+.pokemon-grid::after {
+  flex: 1;
+}
 </style>
