@@ -1,31 +1,32 @@
 <template>
-  <main id="main">
+  <div>
+    <div class="text-center">
     <h1>Pokemons!</h1>
     <router-link to="/">Home</router-link>
-    <br>
+    </div>
     <br>
     <div class="container">
       <form>
-        <div>
-          <label for="name" class="form-label">Nome:</label>
-          <input type="text" id="name" v-model="pokemon.name">
+        <div class="mb-3 col-4">
+          <label for="name">Nome:</label>
+          <input type="text" class="form-control" id="name" v-model="pokemon.name">
         </div>
-        <div>
-          <label for="specie" class="form-label">Espécie:</label>
-          <input type="text" id="specie" v-model="pokemon.specie">
+        <div class="mb-3 col-4">
+          <label for="specie">Espécie:</label>
+          <input type="text" class="form-control" id="specie" v-model="pokemon.specie">
         </div>
-        <div>
-          <label for="imageUrl" class="form-label">URL da imagem:</label>
-          <input type="text" id="imageUrl" v-model="pokemon.imageUrl">
+        <div class="mb-3 col-8">
+          <label for="imageUrl">URL da imagem:</label>
+          <input type="text" class="form-control" id="imageUrl" v-model="pokemon.imageUrl">
         </div>
       </form>
-        <button type="submit" class="btn btn-primary" @click="savePokemon">Salvar</button>
+      <button type="submit" class="btn btn-primary" @click="savePokemon">Salvar</button>
     </div>
     <br>
-    <div class="container" v-if="pokemons.length">
+    <div class="container text-center" v-if="pokemons.length">
       <pokemon-list :pokemons="pokemons"/>
     </div>
-  </main>
+  </div>
 </template>
 
 <script lang="ts">
