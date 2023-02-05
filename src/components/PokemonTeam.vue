@@ -1,16 +1,17 @@
 <template>
-  <main id="main">
-    <h1>Pokemon Team!</h1>
-    <span class="text-primary" style="cursor: pointer; text-decoration: underline;" @click="goBack">Home</span>
-    <br>
+  <div>
+    <div class="text-center">
+      <h1>Pokemon Team</h1>
+      <span class="text-primary" style="cursor: pointer; text-decoration: underline;" @click="goBack">Home</span>
+    </div>
     <br>
     <div class="container">
       <form>
-        <div class="col-6">
+        <div class="mb-3 col-4">
           <label for="name" class="form-label">Nome:</label>
-          <input type="text" id="name" v-model="pokemonTeam.name">
+          <input type="text" id="name" class="form-control" v-model="pokemonTeam.name">
         </div>
-        <div class="col-6">
+        <div class="mb-3 col-4">
           <label for="pokemonList" class="form-label">Espécie:</label>
           <multiselect 
             v-model="pokemonListSelected" 
@@ -29,27 +30,29 @@
       <br>
       <br>
     </div>
-    <div class="card">
-      <div class="card-body">
-        <table class="table table-striped">
-          <thead>
-            <tr>
-              <th class="col-4">Id</th>
-              <th class="col-4">Nome</th>
-              <th class="col-4">Opções</th>
-            </tr>
-          </thead>
-          <tbody v-for="pokemonTeam in pokemonsTeam" :key="pokemonTeam.id">
-            <tr>
-              <td class="col-4">{{ pokemonTeam.id }}</td>
-              <td class="col-4"><span class="text-success" style="cursor: pointer;" @click="openPokemonTeamViewDetails(pokemonTeam)">{{ pokemonTeam.name }}</span></td>
-              <td class="col-4"><span class="text-primary" style="cursor: pointer; text-decoration: underline;" @click="removePokemonTeam(pokemonTeam)">Excluir</span></td>
-            </tr>
-          </tbody>
-        </table>
+    <div class="container">
+      <div class="card">
+        <div class="card-body">
+          <table class="table table-striped">
+            <thead>
+              <tr>
+                <th class="col-4">Id</th>
+                <th class="col-4">Nome</th>
+                <th class="col-4">Opções</th>
+              </tr>
+            </thead>
+            <tbody v-for="pokemonTeam in pokemonsTeam" :key="pokemonTeam.id">
+              <tr>
+                <td class="col-4">{{ pokemonTeam.id }}</td>
+                <td class="col-4"><span class="text-success" style="cursor: pointer;" @click="openPokemonTeamViewDetails(pokemonTeam)">{{ pokemonTeam.name }}</span></td>
+                <td class="col-4"><span class="text-primary" style="cursor: pointer; text-decoration: underline;" @click="removePokemonTeam(pokemonTeam)">Excluir</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
-  </main>
+  </div>
 </template>
 
 <script>
@@ -205,36 +208,4 @@ export default {
 }
 </script>
 
-<style>
-a {
-  cursor: pointer;
-}
-#main {
-  text-align: center;
-  margin-top: 60px;
-}
-.section {
-  max-width: 800px;
-  height: 300px;
-  margin: 80px auto 0 auto;
-  display: flex; 
-  align-items: center;
-  justify-content: space-around;
-  background-color: currentColor;
-}
-.link {
-  text-decoration: none;
-  height: 200px;
-  width: 200px;
-  padding: 10px;
-  text-transform: uppercase;
-  font-size: 20px;
-  font-weight: bold;
-  cursor: pointer;
-  background-color: #ccc;
-}
-.item{
-  color: #2c3e50;
-  margin-top: 43%;
-}
-</style>
+<style></style>
