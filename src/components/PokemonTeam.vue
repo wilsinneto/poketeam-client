@@ -131,7 +131,7 @@ export default {
     },
     async removePokemonTeam(pokemonsTeam) {
       const { data, status } = await this.api.request({
-        method: 'POST',
+        method: 'DELETE',
         url: '/remove-pokemon-team/' + pokemonsTeam.id,
       })
       .catch(function (error) {
