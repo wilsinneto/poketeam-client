@@ -1,6 +1,6 @@
 <template>
   <div class="m-5">
-    <a @click="goBack">Voltar</a>
+    <a href="#" @click="goBack">Voltar</a>
     <br>
     <br>
     <br>
@@ -12,7 +12,7 @@
           </div>
           <div class="col-md-8">
             <div class="card-body">
-              <h3 class="card-title">{{ this.$route.query.data.name }}</h3>
+              <h3 class="card-title fw-bold">{{ this.$route.query.data.name }}</h3>
               <p class="card-text"><span class="fw-bold">Id:</span> {{ this.$route.query.data.id }}</p>
               <p class="card-text"><span class="fw-bold">Espécie:</span> <span class="text-primary">{{ this.$route.query.data.specie }}</span></p>
             </div>
