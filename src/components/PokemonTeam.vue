@@ -31,7 +31,7 @@
     </div>
     <div class="card">
       <div class="card-body">
-        <table class="table table-striped" v-for="pokemonTeam in pokemonsTeam" :key="pokemonTeam.id">
+        <table class="table table-striped">
           <thead>
             <tr>
               <th class="col-4">Id</th>
@@ -39,7 +39,7 @@
               <th class="col-4">Opções</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody v-for="pokemonTeam in pokemonsTeam" :key="pokemonTeam.id">
             <tr>
               <td class="col-4">{{ pokemonTeam.id }}</td>
               <td class="col-4"><span class="text-success" style="cursor: pointer;" @click="openPokemonTeamViewDetails(pokemonTeam)">{{ pokemonTeam.name }}</span></td>
@@ -127,7 +127,7 @@ export default {
       this.$router.go(-1);
     },
     openPokemonTeamViewDetails(pokemonTeam) {
-      this.$router.push({ path: '/pokemon-team-view-details', query: { id: pokemonTeam.id } })
+      this.$router.push({ path: '/pokemon-team-view-details', query: { name: pokemonTeam.name } })
     },
     async removePokemonTeam(pokemonsTeam) {
       const { data, status } = await this.api.request({
