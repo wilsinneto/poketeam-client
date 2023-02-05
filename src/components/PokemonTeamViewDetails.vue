@@ -4,8 +4,8 @@
     <br>
     <br>
     <br>
-    <div class="card mb-3" style="max-width: 540px;">
       <div class="container">
+      <div class="card">
         <div class="row g-0">
           <div class="col-md-8">
             <div class="card-body">
@@ -17,9 +17,10 @@
         </div>
       </div>
     </div>
-      <div class="container" v-if="pokemonTeam.pokemons.length">
-        <pokemon-list :pokemons="pokemonTeam.pokemons"/>
-      </div>
+    <br>
+    <div class="container" v-if="pokemonTeam.pokemons.length">
+      <pokemon-list :pokemons="pokemonTeam.pokemons"/>
+    </div>
   </div>
 </template>
 
