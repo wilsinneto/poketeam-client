@@ -126,8 +126,8 @@ export default {
     goBack() {
       this.$router.go(-1);
     },
-    openPokemonTeamViewDetails() {
-      // this.$route.push({ path: '' })
+    openPokemonTeamViewDetails(pokemonTeam) {
+      this.$router.push({ path: '/pokemon-team-view-details', query: { id: pokemonTeam.id } })
     },
     async removePokemonTeam(pokemonsTeam) {
       const { data, status } = await this.api.request({
