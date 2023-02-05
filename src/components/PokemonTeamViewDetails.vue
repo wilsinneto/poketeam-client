@@ -1,6 +1,6 @@
 <template>
   <div class="m-5">
-    <a href="#" @click="goBack">Pokemon Team</a>
+    <span class="text-primary" style="cursor: pointer; text-decoration: underline;" @click="goBack">Pokemon Team</span>
     <br>
     <br>
     <br>

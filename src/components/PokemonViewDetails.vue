@@ -1,6 +1,6 @@
 <template>
   <div class="m-5">
-    <a href="#" @click="goBack">Voltar</a>
+    <span class="text-primary" style="cursor: pointer; text-decoration: underline;" @click="goBack">Voltar</span>
     <br>
     <br>
     <br>

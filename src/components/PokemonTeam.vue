@@ -1,7 +1,7 @@
 <template>
   <main id="main">
     <h1>Pokemon Team!</h1>
-    <a href="#" @click="goBack">Home</a>
+    <span class="text-primary" style="cursor: pointer; text-decoration: underline;" @click="goBack">Home</span>
     <br>
     <br>
     <div class="container">
@@ -43,7 +43,7 @@
             <tr>
               <td class="col-4">{{ pokemonTeam.id }}</td>
               <td class="col-4"><span class="text-success" style="cursor: pointer;" @click="openPokemonTeamViewDetails(pokemonTeam)">{{ pokemonTeam.name }}</span></td>
-              <td class="col-4"><a href="#" @click="removePokemonTeam(pokemonTeam)">Excluir</a></td>
+              <td class="col-4"><span class="text-primary" style="cursor: pointer; text-decoration: underline;" @click="removePokemonTeam(pokemonTeam)">Excluir</span></td>
             </tr>
           </tbody>
         </table>
