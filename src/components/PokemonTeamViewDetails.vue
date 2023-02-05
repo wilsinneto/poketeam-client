@@ -1,6 +1,6 @@
 <template>
   <div class="m-5">
-    <a href="#" @click="goBack">Voltar</a>
+    <a href="#" @click="goBack">Pokemon Team</a>
     <br>
     <br>
     <br>
@@ -10,19 +10,28 @@
           <div class="col-md-8">
             <div class="card-body">
               <h3 class="card-title fw-bold">{{ pokemonTeam.name }}</h3>
-              <p class="card-text"><span class="fw-bold">Id:</span> {{ this.$route.query }}</p>
+              <br>
+              <p class="card-text"><span class="fw-bold">Id:</span> {{ pokemonTeam.id }}</p>
               </div>
           </div>
         </div>
       </div>
     </div>
+      <div class="container" v-if="pokemonTeam.pokemons.length">
+        <pokemon-list :pokemons="pokemonTeam.pokemons"/>
+      </div>
   </div>
 </template>
 
 <script>
 import axios from 'axios'
+import PokemonList from './PokemonList.vue'
 
 export default {
+  name: 'PokemonTeamViewDetails',
+  components: {
+    PokemonList
+  },
   data() {
     return {
       api: {},
@@ -34,7 +43,6 @@ export default {
     }
   },
   async created() {
-    // adicionar get pokemon team
     this.api = axios.create({
       baseURL: 'http://localhost:5000/api',
       headers: {
@@ -43,10 +51,9 @@ export default {
         'access-control-allow-Methods': '*',
       },
     })
-
     const { data, status } = await this.api.request({
       method: 'GET',
-      url: '/find-pokemon-team' + this.$route.query.id
+      url: `/find-pokemon-team/${this.$route.query.name}`
     })
     .catch(function (error) {
       if (error.response) {
@@ -60,6 +67,10 @@ export default {
         return error.message
       }
     });
+
+    if (status === 400 && data.name === 'PokemonTeamNotFound') {
+      alert('Pokémon não encontrado.')
+    }
 
     if (status === 200) {
       this.pokemonTeam = data
