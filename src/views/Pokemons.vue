@@ -66,6 +66,14 @@ export default {
         return alert('Os campos Nome e Espécie são obrigatórios.')
       }
 
+      if (status === 400 && data.name === 'InvalidNameError') {
+        alert('Campo nome deve ter ao menos 2 caracteres.')
+      }
+
+      if (status === 400 && data.name === 'InvalidSpecieError') {
+        alert('Campo espécie deve ter ao menos 2 caracteres.')
+      }
+
       if (status === 201) {
         const pokemon = this.pokemons.find(pokemon => pokemon.id === data.id)
 
