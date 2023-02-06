@@ -56,8 +56,9 @@
 </template>
 
 <script>
-import axios from 'axios'
 import Multiselect from 'vue-multiselect'
+
+import { createPokemonTeam, findAllPokemonTeam, findAllPokemons, removePokemonTeam } from '@/services'
 
 export default {
   app: "Pokemon Team",
@@ -76,51 +77,14 @@ export default {
     }
   },
   async created() {
-    this.api = axios.create({
-      baseURL: 'http://localhost:5000/api',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'access-control-allow-headers': '*',
-        'access-control-allow-Methods': '*',
-      },
-    })
+    const { data, status } = await findAllPokemons()
 
-    const { data, status } = await this.api.request({
-      method: 'GET',
-      url: '/find-all-pokemons'
-    })
-    .catch(function (error) {
-      if (error.response) {
-        return {
-          data: error.response.data,
-          status: error.response.status
-        }
-      } else if (error.request) {
-        return error.request
-      } else {
-        return error.message
-      }
-    });
     if (status === 200) {
       this.pokemonsList = data
     }
 
-    const response = await this.api.request({
-      method: 'GET',
-      url: '/find-all-pokemon-team'
-    })
-    .catch(function (error) {
-      if (error.response) {
-        return {
-          data: error.response.data,
-          status: error.response.status
-        }
-      } else if (error.request) {
-        return error.request
-      } else {
-        return error.message
-      }
-    });
+    const response = await findAllPokemonTeam()
+
     if (response.status === 200) {
       this.pokemonsTeam = response.data
     }
@@ -132,53 +96,22 @@ export default {
     openPokemonTeamViewDetails(pokemonTeam) {
       this.$router.push({ path: '/pokemon-team-view-details', query: { name: pokemonTeam.name } })
     },
-    async removePokemonTeam(pokemonsTeam) {
-      const { data, status } = await this.api.request({
-        method: 'DELETE',
-        url: '/remove-pokemon-team/' + pokemonsTeam.id,
-      })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            data: error.response.data,
-            status: error.response.status
-          }
-        } else if (error.request) {
-          return error.request
-        } else {
-          return error.message
-        }
-      });
+    async removePokemonTeam(pokemonTeam) {
+      const { data, status } = await removePokemonTeam(pokemonTeam.id)
 
       if (status === 400 && data.name === 'PokemonTeamNotFound') {
         return alert('Time de Pokemon não encontrado.')
       }
 
-      const index = this.pokemonsTeam.findIndex(item => item.id === pokemonsTeam.id)
+      const index = this.pokemonsTeam.findIndex(item => item.id === pokemonTeam.id)
 
       this.pokemonsTeam.splice(index, 1)
     },
     async savePokemonTeam() {
-      const { data, status } = await this.api.request({
-        method: 'POST',
-        url: '/create-pokemon-team',
-        data: {
-          name: this.pokemonTeam.name,
-          pokemons: this.pokemonListSelected
-        }
+      const { data, status } = await createPokemonTeam({
+        name: this.pokemonTeam.name,
+        pokemons: this.pokemonListSelected
       })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            data: error.response.data,
-            status: error.response.status
-          }
-        } else if (error.request) {
-          return error.request
-        } else {
-          return error.message
-        }
-      });
 
       if (status === 400 && data.name === 'MissingParamError') {
         alert('O campo Nome é obrigatório.')

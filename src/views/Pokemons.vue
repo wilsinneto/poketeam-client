@@ -29,8 +29,8 @@
   </div>
 </template>
 
-<script lang="ts">
-import axios from 'axios'
+<script>
+import { findAllPokemons, createPokemon } from '@/services'
 
 import PokemonList from '@/components/PokemonList.vue'
 
@@ -41,7 +41,6 @@ export default {
   },
   data() {
     return {
-      api: {},
       pokemon: {
         id: '',
         name: '',
@@ -53,31 +52,7 @@ export default {
     }
   },
   async created() {
-    this.api = axios.create({
-      baseURL: 'http://localhost:5000/api',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'access-control-allow-headers': '*',
-        'access-control-allow-Methods': '*',
-      },
-    })
-
-    const { data, status } = await this.api.request({
-      method: 'GET',
-      url: '/find-all-pokemons'
-    })
-    .catch(function (error) {
-      if (error.response) {
-        return {
-          data: error.response.data,
-          status: error.response.status
-        }
-      } else if (error.request) {
-        return error.request
-      } else {
-        return error.message
-      }
-    });
+    const { data, status } = await findAllPokemons()
 
     if (status === 200) {
       this.pokemons = data
@@ -85,26 +60,10 @@ export default {
   },
   methods: {
     async savePokemon() {
-      const { data, status } = await this.api.request({
-        method: 'POST',
-        url: '/create-pokemon',
-        data: this.pokemon
-      })
-      .catch(function (error) {
-        if (error.response) {
-          return {
-            data: error.response.data,
-            status: error.response.status
-          }
-        } else if (error.request) {
-          return error.request
-        } else {
-          return error.message
-        }
-      });
+      const { data, status } = await createPokemon(this.pokemon)
 
       if (status === 400 && data.name === 'MissingParamError') {
-        alert('Os campos Nome e Espécie são obrigatórios.')
+        return alert('Os campos Nome e Espécie são obrigatórios.')
       }
 
       if (status === 201) {

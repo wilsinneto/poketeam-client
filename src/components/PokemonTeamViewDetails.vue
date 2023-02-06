@@ -25,8 +25,9 @@
 </template>
 
 <script>
-import axios from 'axios'
 import PokemonList from './PokemonList.vue'
+
+import { findPokemonTeam } from '@/services'
 
 export default {
   name: 'PokemonTeamViewDetails',
@@ -35,7 +36,6 @@ export default {
   },
   data() {
     return {
-      api: {},
       pokemonTeam: {
         id: '',
         name: '',
@@ -44,30 +44,7 @@ export default {
     }
   },
   async created() {
-    this.api = axios.create({
-      baseURL: 'http://localhost:5000/api',
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'access-control-allow-headers': '*',
-        'access-control-allow-Methods': '*',
-      },
-    })
-    const { data, status } = await this.api.request({
-      method: 'GET',
-      url: `/find-pokemon-team/${this.$route.query.name}`
-    })
-    .catch(function (error) {
-      if (error.response) {
-        return {
-          data: error.response.data,
-          status: error.response.status
-        }
-      } else if (error.request) {
-        return error.request
-      } else {
-        return error.message
-      }
-    });
+    const { data, status } = await findPokemonTeam(this.$route.query.name)
 
     if (status === 400 && data.name === 'PokemonTeamNotFound') {
       alert('Pokémon não encontrado.')
