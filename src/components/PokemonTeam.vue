@@ -197,11 +197,15 @@ export default {
       }
 
       if (status === 201) {
-        if (!this.pokemonsTeam.find(pokemonTeam => pokemonTeam.id === data.id)) {
-          this.pokemonsTeam.push(data)
-          this.pokemonTeam = {}
-          this.pokemonListSelected = []
+        const pokemonTeam = this.pokemonsTeam.find(pokemonTeam => pokemonTeam.id === data.id)
+
+        if (pokemonTeam) {
+          return alert('Pokémon com mesmo nome já cadastrado.')
         }
+
+        this.pokemonsTeam.push(data)
+        this.pokemonTeam = {}
+        this.pokemonListSelected = []
       }
     }
   }
