@@ -32,7 +32,7 @@
 <script lang="ts">
 import axios from 'axios'
 
-import PokemonList from './PokemonList.vue'
+import PokemonList from '@/components/PokemonList.vue'
 
 export default {
   app: "Home",

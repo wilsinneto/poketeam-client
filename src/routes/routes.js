@@ -1,8 +1,8 @@
-import Home from "@/components/Home.vue";
-import Pokemons from '@/components/Pokemons.vue';
-import PokemonTeam from '@/components/PokemonTeam.vue';
 import PokemonTeamViewDetails from '@/components/PokemonTeamViewDetails.vue';
 import PokemonViewDetails from '@/components/PokemonViewDetails.vue';
+import Home from "@/views/Home.vue";
+import Pokemons from '@/views/Pokemons.vue';
+import PokemonTeam from '@/views/PokemonTeam.vue';
 
 export default [
   { path: '/', component: Home },
