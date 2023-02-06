@@ -1,11 +1,11 @@
 <template>
   <div class="m-5">
-    <span class="text-primary" style="cursor: pointer; text-decoration: underline;" @click="goBack">Pokemon Team</span>
+    <span class="text-primary" style="cursor: pointer; text-decoration: underline;" @click="goBack">Voltar</span>
     <br>
     <br>
     <br>
+    <div class="card">
       <div class="container">
-      <div class="card">
         <div class="row g-0">
           <div class="col-md-8">
             <div class="card-body">
