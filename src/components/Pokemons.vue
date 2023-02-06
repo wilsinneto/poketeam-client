@@ -45,7 +45,7 @@ export default {
       pokemon: {
         id: '',
         name: '',
-        teamId: '',
+        teamId: null,
         imageUrl: '',
         specie: ''
       },
@@ -78,6 +78,7 @@ export default {
         return error.message
       }
     });
+
     if (status === 200) {
       this.pokemons = data
     }
@@ -107,10 +108,14 @@ export default {
       }
 
       if (status === 201) {
-        if (!this.pokemons.find(pokemon => pokemon.id === data.id)) {
-          this.pokemons.push(data)
-          this.pokemon = {}
+        const pokemon = this.pokemons.find(pokemon => pokemon.id === data.id)
+
+        if (pokemon) {
+          return alert('Pokémon com mesmo nome já cadastrado.')
         }
+
+        this.pokemons.push(data)
+        this.pokemon = {}
       }
     }
   }
