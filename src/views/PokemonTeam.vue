@@ -12,7 +12,7 @@
           <input type="text" id="name" class="form-control" v-model="pokemonTeam.name">
         </div>
         <div class="mb-3 col-4">
-          <label for="pokemonList" class="form-label">Espécie:</label>
+          <label for="pokemonList" class="form-label">Lista de pokémons:</label>
           <multiselect 
             v-model="pokemonListSelected" 
             track-by="name"
